@@ -1,98 +1,20 @@
 //----------------------------------------------------------------------------
-// icap_stream - module
-//----------------------------------------------------------------------------
-// IMPORTANT:
-// DO NOT MODIFY THIS FILE EXCEPT IN THE DESIGNATED SECTIONS.
-//
-// SEARCH FOR --USER TO DETERMINE WHERE CHANGES ARE ALLOWED.
-//
-// TYPICALLY, THE ONLY ACCEPTABLE CHANGES INVOLVE ADDING NEW
-// PORTS AND GENERICS THAT GET PASSED THROUGH TO THE INSTANTIATION
-// OF THE USER_LOGIC ENTITY.
-//----------------------------------------------------------------------------
-//
-// ***************************************************************************
-// ** Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.            **
-// **                                                                       **
-// ** Xilinx, Inc.                                                          **
-// ** XILINX IS PROVIDING THIS DESIGN, CODE, OR INFORMATION "AS IS"         **
-// ** AS A COURTESY TO YOU, SOLELY FOR USE IN DEVELOPING PROGRAMS AND       **
-// ** SOLUTIONS FOR XILINX DEVICES.  BY PROVIDING THIS DESIGN, CODE,        **
-// ** OR INFORMATION AS ONE POSSIBLE IMPLEMENTATION OF THIS FEATURE,        **
-// ** APPLICATION OR STANDARD, XILINX IS MAKING NO REPRESENTATION           **
-// ** THAT THIS IMPLEMENTATION IS FREE FROM ANY CLAIMS OF INFRINGEMENT,     **
-// ** AND YOU ARE RESPONSIBLE FOR OBTAINING ANY RIGHTS YOU MAY REQUIRE      **
-// ** FOR YOUR IMPLEMENTATION.  XILINX EXPRESSLY DISCLAIMS ANY              **
-// ** WARRANTY WHATSOEVER WITH RESPECT TO THE ADEQUACY OF THE               **
-// ** IMPLEMENTATION, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OR        **
-// ** REPRESENTATIONS THAT THIS IMPLEMENTATION IS FREE FROM CLAIMS OF       **
-// ** INFRINGEMENT, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS       **
-// ** FOR A PARTICULAR PURPOSE.                                             **
-// **                                                                       **
-// ***************************************************************************
-//
-//----------------------------------------------------------------------------
 // Filename:          icap_stream
 // Version:           1.00.a
-// Description:       Example Axi Streaming core (Verilog).
-// Date:              Wed Aug 07 11:13:27 2013 (by Create and Import Peripheral Wizard)
-// Verilog Standard:  Verilog-2001
-//----------------------------------------------------------------------------
-// Naming Conventions:
-//   active low signals:                    "*_n"
-//   clock signals:                         "clk", "clk_div#", "clk_#x"
-//   reset signals:                         "rst", "rst_n"
-//   generics:                              "C_*"
-//   user defined types:                    "*_TYPE"
-//   state machine next state:              "*_ns"
-//   state machine current state:           "*_cs"
-//   combinatorial signals:                 "*_com"
-//   pipelined or register delay signals:   "*_d#"
-//   counter signals:                       "*cnt*"
-//   clock enable signals:                  "*_ce"
-//   internal version of output port:       "*_i"
-//   device pins:                           "*_pin"
-//   ports:                                 "- Names begin with Uppercase"
-//   processes:                             "*_PROCESS"
-//   component instantiations:              "<ENTITY_>I_<#|FUNC>"
+// Description:       ICAP hardmacro instantitation
+// Author:            Vipin K
+// 
 //----------------------------------------------------------------------------
 
-////////////////////////////////////////////////////////////////////////////////
-//
-//
-// Definition of Ports
-// ACLK              : Synchronous clock
-// ARESETN           : System reset, active low
-// S_AXIS_TREADY  : Ready to accept data in
-// S_AXIS_TDATA   :  Data in 
-// S_AXIS_TLAST   : Optional data in qualifier
-// S_AXIS_TVALID  : Data in is valid
-//
-////////////////////////////////////////////////////////////////////////////////
-
-//----------------------------------------
-// Module Section
-//----------------------------------------
 module icap_ctrl 
 	(
-		// ADD USER PORTS BELOW THIS LINE 
-		// -- USER ports added here 
-		// ADD USER PORTS ABOVE THIS LINE 
-
-		// DO NOT EDIT BELOW THIS LINE ////////////////////
-		// Bus protocol ports, do not add or delete. 
 		ACLK,
 		ARESETN,
 		S_AXIS_TREADY,
 		S_AXIS_TDATA,
 		S_AXIS_TLAST,
 		S_AXIS_TVALID
-		// DO NOT EDIT ABOVE THIS LINE ////////////////////
 	);
-
-// ADD USER PORTS BELOW THIS LINE 
-// -- USER ports added here 
-// ADD USER PORTS ABOVE THIS LINE 
 
 input                                     ACLK;
 input                                     ARESETN;

@@ -1,3 +1,11 @@
+----------------------------------------------------------------------------
+-- Filename:          icap_stream
+-- Version:           1.00.a
+-- Description:       Topmost file instantiating the DMA controller and the ICAP macro.
+-- Author:            Vipin K
+-- 
+----------------------------------------------------------------------------
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

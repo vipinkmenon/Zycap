@@ -2,7 +2,7 @@
  * icap_ctrl.c
  *
  *  Created on: Jan 22, 2014
- *      Author: vipin2
+ *  Author: Vipin K
  */
 #include "icap_ctrl.h"
 #include <stdlib.h>
