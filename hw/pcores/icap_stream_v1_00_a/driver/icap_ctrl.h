@@ -15,12 +15,10 @@
 #include <stdlib.h>
 #include "xscugic.h"
 #include "ff.h"
+#include "xil_cache.h"
 #define MAX_BS_NUM 5
-#define BS1_ADDR 0x200000
-#define BS2_ADDR 0x300000
-#define BS3_ADDR 0x400000
-#define BS4_ADDR 0x500000
-#define BS5_ADDR 0x600000
+#define BS_BASEADDR 0x200000
+
 
 typedef struct bit_info{
         char name[128];
@@ -87,9 +85,9 @@ typedef struct bit_info{
 /* Flags interrupt handlers use to notify the application context the events.
 */
 volatile int TxDone;
-volatile int RxDone;
 volatile int Error;
 
 int Init_Icap_Ctrl(XScuGic * InterruptController);
-int Config_PR_Bitstream(char *bs_name);
+int Config_PR_Bitstream(char *bs_name,int sync_intr);
 int Prefetch_PR_Bitstream(char *bs_name);
+int Sync_ICAP();

@@ -52,12 +52,8 @@ bs_info * init_bs_list(int num_bs)
             bs_list[i].next = NULL;
         else
             bs_list[i].next = &bs_list[i+1];
+        bs_list[i].addr = BS_BASEADDR + i*0x100000;
     }
-    bs_list[0].addr = BS1_ADDR;
-    bs_list[1].addr = BS2_ADDR;
-    bs_list[2].addr = BS3_ADDR;
-    bs_list[3].addr = BS4_ADDR;
-    bs_list[4].addr = BS5_ADDR;
     return bs_list;
 }
 
@@ -297,17 +293,14 @@ int Init_Icap_Ctrl(XScuGic * InterruptController)
   	/* Enable all interrupts */
   XAxiDma_IntrEnable(&xcdma, XAXIDMA_IRQ_ALL_MASK,XAXIDMA_DMA_TO_DEVICE);
   bs_list = init_bs_list(MAX_BS_NUM);
-  return 0;
+  return XST_SUCCESS;
 }
 
 
 
-int Config_PR_Bitstream(char *bs_name)
+int Config_PR_Bitstream(char *bs_name,int sync_intr)
 {
 	int Status;
-	TxDone = 0;
-	RxDone = 0;
-	Error = 0;
     int bs_pres;
     int pres_first;
     int pres_last;
@@ -353,15 +346,29 @@ int Config_PR_Bitstream(char *bs_name)
 		xil_printf("DMA transfer failed\r\n",Status);
 		return XST_FAILURE;
 	}
-	//print("Successfully configured PR bitstream");
-	while (!TxDone && !RxDone && !Error) {
+	TxDone = 0;
+	Error = 0;
+	if(sync_intr)
+	{
+		Status = Sync_ICAP();
+		if (Status != XST_SUCCESS) {
+			xil_printf("interrupt failed\r\n",Status);
+			return XST_FAILURE;
+		}
+	}
+	return XST_SUCCESS;
+}
+
+
+int Sync_ICAP()
+{
+	while (!TxDone && !Error) {
 	}
 	if (Error) {
 		xil_printf("Failed transmit");
-		return 0;
+		return XST_FAILURE;
 	}
-	//DisableIntrSystem(InterruptController, TX_INTR_ID, RX_INTR_ID);
-	return 0;
+	return XST_SUCCESS;
 }
 
 int Prefetch_PR_Bitstream(char *bs_name)
@@ -401,5 +408,5 @@ int Prefetch_PR_Bitstream(char *bs_name)
         bs_list[pres_last].next = &bs_list[pres_first];
         bs_list[pres_first].prev = &bs_list[pres_last];
     }
-	return 0;
+	return XST_SUCCESS;
 }
