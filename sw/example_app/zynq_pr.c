@@ -8,7 +8,7 @@
 #include "xil_io.h"
 #include "xstatus.h"
 #include "xtmrctr.h"
-#include "icap_ctrl.h"
+#include "zycap.h"
 
 #define PARTIAL_BITFILE1_LEN 0x6A1C   /*Partial bitstream size. Not needed by the ICAP, used only to calculate the performance*/
 #define PARTIAL_BITFILE2_LEN 0x6A58   /*Partial bitstream size. Not needed by the ICAP, used only to calculate the performance*/
@@ -39,7 +39,7 @@ int main()
 	xil_printf("Register content is %0x\n\r",rtn);
 	print("Starting Reconfiguration\n\r");
 	//Initialise the ICAP controller
-	Status = Init_Icap_Ctrl(&InterruptController);
+	Status = Init_Zycap(&InterruptController);
 	if (Status != XST_SUCCESS){
 		xil_printf("ICAP controller initialisation failed\r\n",Status);
 		return XST_FAILURE;
@@ -87,7 +87,7 @@ int main()
 		return XST_FAILURE;
 	}
 	//synchronize the interrupt
-	Sync_ICAP();
+	Sync_Zycap();
 	delay = XTmrCtr_GetValue(&TimerCounterInst, 0);
 	xil_printf("Performance with prefetching and deferred interrupt sync: %d MBytes/sec\r\n", PARTIAL_BITFILE1_LEN*100/delay);
 	Xil_Out32(XPAR_REG_PERIPHERAL_0_BASEADDR,0x0);
